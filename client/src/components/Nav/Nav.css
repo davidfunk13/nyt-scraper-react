@@ -1,0 +1,10 @@
+.navbar {
+    width: 100%;
+    border-bottom: 1px solid black;
+    height: 100px;
+    background: lightblue;
+}
+.title-text {
+    margin: 0 auto;
+    color: white;
+}
