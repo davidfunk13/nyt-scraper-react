@@ -1,17 +1,37 @@
-import React from 'react'
+import React, { Component } from 'react';
 import './Searchbox.css'
+import { Input, FormBtn } from '../Form';
 
-const Searchbox = props => {
-    return (
-        <div className='searchbox'>
-            <div className='input1'>
-                Input here
+class Searchbox extends Component {
+    state = {
+        title: ""
+    }
+    handleInputChange = event => {
+        const { name, value } = event.target;
+        this.setState({
+          [name]: value
+        });
+      };
+
+  handleFormSubmit = event => {
+    event.preventDefault();
+    console.log('heya ')
+  };
+    render() {
+        return (
+            <div className='searchbox'>
+                <Input
+                    value={this.state.title}
+                    onChange={this.handleInputChange}
+                    name="title"
+                    placeholder="Title (required)"
+                />
+                <FormBtn
+                onClick={this.handleFormSubmit}
+              >Submit</FormBtn>
             </div>
-            <div className='input2'>
-            Input here
-            </div>
-        </div>
-    )
+        )
+    }
 }
 
 export default Searchbox

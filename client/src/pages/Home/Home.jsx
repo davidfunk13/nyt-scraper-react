@@ -5,6 +5,17 @@ import Results from '../../components/Results/Results';
 import Saved from '../../components/Saved/Saved';
 class Home extends Component {
 
+    state = {
+        title: ""
+    }
+
+    handleInputChange = event => {
+        const { name, value } = event.target;
+        this.setState({
+          [name]: value
+        });
+      };
+
     render() {
         return (
             <Container>
