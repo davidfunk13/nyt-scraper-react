@@ -1,0 +1,10 @@
+.results {
+    border: 1px solid black;
+    padding: 5%;
+    margin: 3%;
+}
+
+.input1,
+.input2 {
+    border: 1px solid black;
+}
