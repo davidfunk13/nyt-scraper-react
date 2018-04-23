@@ -1,24 +1,41 @@
 import React, { Component } from 'react';
 import { Container, Row, Column } from '../../components/BootstrapGrid';
-import { Input, TextArea, FormBtn } from '../../components/Form'
+import { Input, FormBtn } from '../../components/Form'
 import API from '../../utils/API'
+import request from 'request'
+import Cheerio from '../../utils/Cheerio'
 import { List, ListItem } from '../../components/List'
 class Home extends Component {
 
     state = {
         title: "",
-        posts: []
+        posts: [],
+        cheerios: []
     }
     componentDidMount() {
         this.loadPosts();
     }
 
+
+cheerioScrape = () => {
+    Cheerio.cheerioScrape().then(res => this.setState({cheerios: res.data })).catch(err => console.log(err))
+    console.log(this.state.cheerios)
+}
+
     loadPosts = () => {
-        API.getPosts()
-            .then(res =>
-                this.setState({ posts: res.data, title: "" })
-            )
-            .catch(err => console.log(err))
+        // request.get({
+        //     url: "https://api.nytimes.com/svc/search/v2/articlesearch.json",
+        //     qs: {
+        //       'api-key': "a039a30e45144355ba84c17a25a0796c"
+        //     },
+        //   }, function(err, response, body) {
+        //     body = JSON.parse(body);
+        //   })
+        // API.getPosts()
+        //     .then(res =>
+        //         this.setState({ posts: res.data, title: "" })
+        //     )
+        //     .catch(err => console.log(err))
     }
 
     handleInputChange = event => {
@@ -30,12 +47,19 @@ class Home extends Component {
 
     handleFormSubmit = event => {
         event.preventDefault();
+        console.log(this.state.title)
         if (this.state.title) {
-            API.savePost({
-                title: this.state.title
-            }).then(res => this.loadPosts())
-                .catch(err => console.log(err))
-            console.log(this.state)
+            request.get({
+                url: "https://api.nytimes.com/svc/search/v2/articlesearch.json",
+                qs: {
+                  'api-key': "a039a30e45144355ba84c17a25a0796c",
+                  'q' : this.state.title
+                },
+              }, function(err, response, body) {
+                body = JSON.parse(body);
+                console.log(body);
+              })
+
         }
     };
 
