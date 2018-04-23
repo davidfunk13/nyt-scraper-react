@@ -1,12 +1,10 @@
 import React, { Component } from 'react';
-import { Container, Row, Column } from '../../components/BootstrapGrid'
-import Searchbox from '../../components/SearchBox/Searchbox';
-import Results from '../../components/Results/Results';
-import Saved from '../../components/Saved/Saved';
+import { Container, Row, Column } from '../../components/BootstrapGrid';
+import {Input, TextArea, FormBtn} from '../../components/Form'
 class Home extends Component {
 
     state = {
-        title: ""
+        search: ""
     }
 
     handleInputChange = event => {
@@ -15,15 +13,23 @@ class Home extends Component {
           [name]: value
         });
       };
+    
+      handleFormSubmit = event => {
+        event.preventDefault();
+        console.log(this.state.search)
+      };
 
     render() {
         return (
             <Container>
                 <Row>
                     <Column>
-                    <Searchbox/>
-                    <Results/>
-                    <Saved/>
+                    <form>
+                    <Input value={this.state.search}
+                    name='search'
+                    onChange={this.handleInputChange}/>
+                    <FormBtn onClick={this.handleFormSubmit}>Submit</FormBtn>
+                    </form>
                     </Column>
                 </Row>
 
