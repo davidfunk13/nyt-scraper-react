@@ -1,6 +1,6 @@
 import React from 'react';
 export const Input = props => (
     <div className='form-group'>
-        <input className='form-control'{...props}/>
+        <input type='text' className='form-control'{...props}/>
     </div>
 );
