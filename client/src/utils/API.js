@@ -4,9 +4,10 @@ export default {
     getPosts: function () {
         return axios.get('/api/posts')
     },
-    // savePost: function (postData) {
-    //     return axios.post("/api/posts", postData);
-    // },
+    savePost: function (postData) {
+        console.log(postData)
+        // return axios.post("/api/posts", postData);
+    },
     scrapeArticles: function (query) {
         // console.log(query)
         let queryData = {

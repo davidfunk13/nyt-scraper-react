@@ -21,14 +21,23 @@ class Home extends Component {
    
     // }
 
-    handleInputChange = event => {
+    inputHandler = event => {
         const { name, value } = event.target;
         this.setState({
             [name]: value
         });
     };
 
-    handleFormSubmit = event => {
+    saveArticle = (title) =>{
+        console.log(title)
+        API.savepost(title)
+
+
+    }
+
+
+
+    scrapeNyt = event => {
         event.preventDefault();
         let query = this.state.formInput
         Scrape.scrapePosts(query).then(data => {
@@ -66,27 +75,25 @@ class Home extends Component {
                     <Column>
                         <Input
                             value={this.state.formInput}
-                            onChange={this.handleInputChange}
+                            onChange={this.inputHandler}
                             name="formInput"
                             placeholder="Search Query (required)"
                         />
-                        <FormBtn disabled={!(this.state.formInput)} onClick={this.handleFormSubmit}>Scrape NYT API</FormBtn>
+                        <FormBtn disabled={!(this.state.formInput)} onClick={this.scrapeNyt}>Scrape NYT API</FormBtn>
                     </Column>
                     <Column>
                         {this.state.posts.length ? (
                             <ArticleContainer>
                                 {this.state.posts.map(posts => (
-                                    <Article key={posts.title}>
-                                        <h1 className='post-title'>
-                                            {posts.title}
-                                        </h1>
-                                        <h2 className='post-url'>{posts.url}</h2>
-                                        <h2 className='post-snippet'>{posts.snippet}</h2>
-                                        <h2 className='post-source'>{posts.source}</h2>
-
-                                        <h2 className='post-pubdate'>{posts.pubDate}</h2>
-                                        <button className='save-article'>Save Article</button>
-
+                                    <Article 
+                                        key={posts.title}
+                                        title={posts.title}
+                                        url={posts.url}
+                                        source={posts.source}
+                                        snipped={posts.snippet}
+                                        pubDate={posts.pubDate}
+                                        saveArticle={this.saveArticle}
+                                    >
                                     </Article>
                                 ))}
                             </ArticleContainer>
