@@ -5,12 +5,14 @@ import { Input, FormBtn } from '../../components/Form'
 import { ArticleContainer, Article } from '../../components/Article'
 import Scrape from '../../utils/Scrape'
 import './Home.css'
+import Saved from '../../components/Saved/Saved';
 
 class Home extends Component {
 
     state = {
         formInput: "",
         posts: [],
+        saved: [],
     }
 
     componentDidMount() {
@@ -19,8 +21,11 @@ class Home extends Component {
     };
     loadArticles = () => {
         console.log('hey')
-        API.getPosts().then(res =>{
+        API.getPosts().then(res => {
             console.log(res)
+            this.setState({ saved: res.data })
+        }).then(res => {
+            console.log(this.state)
         })
     }
 
@@ -31,7 +36,7 @@ class Home extends Component {
         });
     };
 
-    saveArticle = (title) =>{
+    saveArticle = (title) => {
         console.log(title)
         API.saveArticle(title).then(res => this.loadArticles)
 
@@ -56,19 +61,19 @@ class Home extends Component {
                 let snippet = element.snippet
                 let source = element.source
                 let pubDate = element.pub_date
-          
+
                 let article = {
-                  title: title,
-                  url: url,
-                  synopsis: synopsis,
-                  snippet: snippet,
-                  source: source,
-                  pubDate: pubDate,
+                    title: title,
+                    url: url,
+                    synopsis: synopsis,
+                    snippet: snippet,
+                    source: source,
+                    pubDate: pubDate,
                 }
                 articlesArray.push(article)
             })
             console.log(articlesArray)
-            this.setState({posts:articlesArray})
+            this.setState({ posts: articlesArray })
         })
     };
     render() {
@@ -88,7 +93,7 @@ class Home extends Component {
                         {this.state.posts.length ? (
                             <ArticleContainer>
                                 {this.state.posts.map(posts => (
-                                    <Article 
+                                    <Article
                                         key={posts.title}
                                         title={posts.title}
                                         url={posts.url}
@@ -103,6 +108,23 @@ class Home extends Component {
                         ) : (
                                 <h3>No Results to Display</h3>
                             )}
+                    </Column>
+                    <Column>
+                        {this.state.saved.length ? (
+                            <div className='savedposts'>
+                                {this.state.saved.map(saved => (
+                                    <Saved
+                                        saved={saved.title}
+                                    >
+                                        
+                                    </Saved>
+                                ))}
+                            </div>
+
+                        ) : (
+                                <h3>No Saved Posts to Display</h3>
+                            )}
+
                     </Column>
                 </Row>
             </Container>
