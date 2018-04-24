@@ -30,8 +30,9 @@ class Home extends Component {
 
     saveArticle = (title) =>{
         console.log(title)
-        API.savepost(title)
-
+        API.saveArticle(title).then(res=>{}).catch(err => {
+            console.log(err)
+        })
 
     }
 
