@@ -13,9 +13,7 @@ class Home extends Component {
 
     componentDidMount() {
         this.loadArticles()
-        Scrape.scrapePosts().then(data => {
-            console.log(data)
-        })
+
     };
     loadArticles = () => {
    
@@ -31,9 +29,33 @@ class Home extends Component {
     handleFormSubmit = event => {
         // event.preventDefault();
         let query = this.state.formInput
-        // console.log(query) 
-        API.scrapeArticles(query)
-        
+        Scrape.scrapePosts(query).then(data => {
+            let articlesArray = [];
+            // console.log(data)
+            let article = data.data.response.docs;
+            // console.log(article)
+            article.forEach(element => {
+                // console.log(element)
+                let title = element.headline.main
+                let url = element.web_url
+                let synopsis = element.abstract
+                let snippet = element.snippet
+                let source = element.source
+                let pubDate = element.pub_date
+          
+                let article = {
+                  title: title,
+                  url: url,
+                  synopsis: synopsis,
+                  snippet: snippet,
+                  source: source,
+                  pubDate: pubDate,
+                }
+                articlesArray.push(article)
+            })
+            console.log(articlesArray)
+            this.setState({posts:articlesArray})
+        })
     };
     render() {
         return (
