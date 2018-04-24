@@ -4,7 +4,7 @@ const Schema = mongoose.Schema;
 const postSchema = new Schema ({
     title: {type: String, required: true, unique: true},
     url: {type: String,},
-    synopsis: {type: String},
+    // synopsis: {type: String},
     snippet: {type: String},
     source: {type: String},
     pubDate: {type: String},

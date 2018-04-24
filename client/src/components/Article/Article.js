@@ -10,6 +10,6 @@ export const Article = props => (
     <h2 className='post-source'>{props.source}</h2>
 
     <h2 className='post-pubdate'>{props.pubDate}</h2>
-    <button type='submit' onClick={() => props.saveArticle(props.title)} className={`save-post ${props.title}`}>Save Article</button>
+    <button type='submit' onClick={() => props.saveArticle(props)} className={`save-post ${props.title}`}>Save Article</button>
   </li>
 );

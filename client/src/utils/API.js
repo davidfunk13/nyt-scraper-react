@@ -5,10 +5,15 @@ export default {
         return axios.get('/api/posts')
     },
     saveArticle: function (title) {
-        console.log(title)
+        // console.log(title)
         let Title = {
-            title:title
+            title: title.title,
+            url: title.url,
+            snippet: title.snippet,
+            source: title.source,
+            pubDate: title.pubDate
         }
+        // console.log(Title)
         return axios.post("/api/articles", Title);
     },
     scrapeArticles: function (query) {

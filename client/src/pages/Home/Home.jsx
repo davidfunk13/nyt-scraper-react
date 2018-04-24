@@ -17,9 +17,9 @@ class Home extends Component {
     //     this.loadArticles()
 
     // };
-    // loadArticles = () => {
-   
-    // }
+    loadArticles = () => {
+        console.log('hey')
+    }
 
     inputHandler = event => {
         const { name, value } = event.target;
@@ -30,9 +30,8 @@ class Home extends Component {
 
     saveArticle = (title) =>{
         console.log(title)
-        API.saveArticle(title).then(res=>{}).catch(err => {
-            console.log(err)
-        })
+        API.saveArticle(title).then(res => this.loadArticles)
+
 
     }
 
