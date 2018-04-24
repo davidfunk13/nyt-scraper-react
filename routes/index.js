@@ -10,6 +10,9 @@ router.route('/api/scraper')
   .post(postsController.scraper)
   .get(postsController.scraper)
 
+  router.route('/api/posts')
+    .get(postsController.getAll)
+
 // If no API routes are hit, send the React app
 router.use(function (req, res) {
   res.sendFile(path.join(__dirname, "../client/build/index.html"));
