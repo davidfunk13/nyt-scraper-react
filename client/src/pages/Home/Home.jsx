@@ -2,9 +2,8 @@ import React, { Component } from 'react';
 import { Container, Row, Column } from '../../components/BootstrapGrid';
 import API from '../../utils/API'
 import { Input, FormBtn } from '../../components/Form'
-// import Cheerio from '../../utils/Cheerio'
 import { List, ListItem } from '../../components/List'
-// import NYT from '../../utils/NYT'
+import Scrape from '../../utils/Scrape'
 class Home extends Component {
 
     state = {
@@ -14,13 +13,12 @@ class Home extends Component {
 
     componentDidMount() {
         this.loadArticles()
+        Scrape.scrapePosts().then(data => {
+            console.log(data)
+        })
     };
     loadArticles = () => {
-        API.getPosts().then(res => {
-            // console.log(res.data)
-            this.setState({ posts: res.data })
-        }).then(console.log(this.state))
-        // console.log(this.state)
+   
     }
 
     handleInputChange = event => {
@@ -31,11 +29,11 @@ class Home extends Component {
     };
 
     handleFormSubmit = event => {
-        event.preventDefault();
+        // event.preventDefault();
         let query = this.state.formInput
-        // console.log(query)
+        // console.log(query) 
         API.scrapeArticles(query)
-        this.loadArticles()
+        
     };
     render() {
         return (
@@ -55,12 +53,10 @@ class Home extends Component {
                             <List>
                                 {this.state.posts.map(posts => (
                                     <ListItem key={posts._id}>
-                                        {/* <Link to={"/books/" + book._id}> */}
-                                            <strong>
-                                                {posts.title}
-                                            </strong>
-                                        {/* </Link> */}
-                                        {/* <DeleteBtn onClick={() => this.deleteBook(book._id)} /> */}
+                                        <strong>
+                                            {posts.title}
+                                        </strong>
+
                                     </ListItem>
                                 ))}
                             </List>

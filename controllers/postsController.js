@@ -18,11 +18,7 @@ module.exports = {
     scraper: function (req, res) {
         let queryData = req.body.query
           scraper(queryData)
-    },
-    scraperGet: function (req, res) {
-        scraper()
-        console.log(res.body)
-    }
 
+    },
 }
 
