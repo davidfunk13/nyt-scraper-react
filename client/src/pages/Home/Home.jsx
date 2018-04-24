@@ -38,7 +38,8 @@ class Home extends Component {
 
     saveArticle = (title) => {
         console.log(title)
-        API.saveArticle(title).then(res => this.loadArticles)
+        API.saveArticle(title)
+        this.loadArticles()
 
 
     }
