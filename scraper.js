@@ -1,5 +1,3 @@
-// import { resolveNaptr } from 'dns0';
-
 const request = require('request');
 const mongoose = require('mongoose');
 const db = require('./models');
@@ -10,11 +8,11 @@ const scraper = (queryData) => {
   request.get({
     url: "https://api.nytimes.com/svc/search/v2/articlesearch.json",
     qs: {
-      'api-key': "a039a30e45144355ba84c17a25a0796c"
+      'api-key': "a039a30e45144355ba84c17a25a0796c",
+      "q" : queryData
     },
   }, function (err, response, body) {
     body = JSON.parse(body);
-    // console.log(body.response.docs)
     let articles = body.response.docs
     articles.forEach(element => {
       // console.log(element)
@@ -33,22 +31,18 @@ const scraper = (queryData) => {
         source: source,
         pubDate: pubDate,
       }
-      console.log(article)
+      // console.log(article)
       articleData.push(article)
-      // db.Post.create({article}).then(article => {
-
-      // })
-      
+      db.Post.create({title:article.title}).then(article => {
+        console.log(article)
+      }).catch(err => {
+        console.log(err)
+      })
     });
     return articleData
   
   });
 
-  // console.log(articleData)
-  // return articleData
-
-  // })
-  // return articleData
 }
 
 module.exports = scraper;

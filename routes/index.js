@@ -8,6 +8,7 @@ router.route("/")
 
 router.route('/api/scraper')
   .post(postsController.scraper)
+  .get(postsController.scraper)
 
 // If no API routes are hit, send the React app
 router.use(function (req, res) {

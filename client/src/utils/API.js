@@ -12,7 +12,6 @@ export default {
         let queryData = {
             query: query
         }
-        console.log(queryData)
         return axios.post('/api/scraper', queryData)
     }
 };

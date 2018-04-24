@@ -12,6 +12,10 @@ class Home extends Component {
         posts: [],
     }
 
+    loadArticles = (res) => {
+        console.log('res')
+    }
+
     handleInputChange = event => {
         const { name, value } = event.target;
         this.setState({
@@ -22,14 +26,11 @@ class Home extends Component {
       handleFormSubmit = event => {
         event.preventDefault();
         let query = this.state.formInput
-        console.log(query)
-            API.scrapeArticles(query).then(data =>{
-                console.log(data)
-            }).catch(err => {
-                if (err) {
-                    console.log(err)
-                }
-            })
+        // console.log(query)
+         API.scrapeArticles(query)
+
+        //   console.log(this.state)
+            
       };
     render() {
         return (
