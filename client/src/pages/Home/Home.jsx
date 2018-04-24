@@ -5,6 +5,7 @@ import { Input, FormBtn } from '../../components/Form'
 import { ArticleContainer, Article } from '../../components/Article'
 import Scrape from '../../utils/Scrape'
 import './Home.css'
+
 class Home extends Component {
 
     state = {
@@ -84,6 +85,7 @@ class Home extends Component {
                                         <h2 className='post-source'>{posts.source}</h2>
 
                                         <h2 className='post-pubdate'>{posts.pubDate}</h2>
+                                        <button className='save-article'>Save Article</button>
 
                                     </Article>
                                 ))}
