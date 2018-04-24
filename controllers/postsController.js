@@ -16,7 +16,7 @@ console.log(req.body)
         db.Post
             .create(req.body)
             .then(dbmodel => res.json(dbmodel))
-             .catch(err => res.status(422).json(err))
+                .catch(err =>console.log(err))
     },
     getAll: function (req, res) {
         db.Post
