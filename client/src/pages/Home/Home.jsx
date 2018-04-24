@@ -36,6 +36,14 @@ class Home extends Component {
         });
     };
 
+    deleteArticle = (id) => {
+        console.log(id)
+        API.deleteArticle({id}).then(res=> {
+            console.log(res)
+        })
+        this.loadArticles()
+    }
+
     saveArticle = (title) => {
         console.log(title)
         API.saveArticle(title)
@@ -117,12 +125,14 @@ class Home extends Component {
                             <SavedContainer>
                                 {this.state.saved.map(saved => (
                                     <Saved
-                                    key={saved.title}
+                                    key={saved._id}
+                                    id={saved._id}
                                     title={saved.title}
                                     url={saved.url}
                                     source={saved.source}
                                     snippet={saved.snippet}
                                     pubDate={saved.pubDate}
+                                    deleteArticle={this.deleteArticle}
                                     >
                                     </Saved>
                                 ))}

@@ -16,6 +16,9 @@ router.route('/api/scraper')
     router.route('/api/saved')
     .get(postsController.getAll)
 
+    router.route('/api/delete')
+    .post(postsController.deleteArticle)
+
 // If no API routes are hit, send the React app
 router.use(function (req, res) {
   res.sendFile(path.join(__dirname, "../client/build/index.html"));

@@ -31,5 +31,13 @@ console.log(req.body)
           scraper(queryData)
 
     },
+    deleteArticle: function (req, res) {
+        let id = {'_id':req.body.id}
+
+        console.log(id)
+        db.Post.deleteOne(id).catch(err => {
+            res.json(err)
+        })
+    }
 }
 

@@ -4,6 +4,10 @@ export default {
     getPosts: function () {
         return axios.get('/api/saved')
     },
+    deleteArticle: function (id) {
+        console.log(id)
+        return axios.post('/api/delete', id)
+    },
     saveArticle: function (title) {
         // console.log(title)
         let Title = {
