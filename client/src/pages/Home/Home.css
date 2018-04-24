@@ -1,0 +1,21 @@
+.post-title{
+    font-size: 100%;
+}
+.post-url{
+    font-size: 75%;
+}
+.post-snippet{
+    font-size: 75%;
+}
+.post-source{
+    font-size: 70%;
+}
+.post-pubdate{
+    font-size: 70%;
+}
+.list-overflow-container {
+    border: 1px solid black;
+}
+.list-group-item {
+    border: 1px solid black;
+}

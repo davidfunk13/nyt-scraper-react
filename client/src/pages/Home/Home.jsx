@@ -2,8 +2,9 @@ import React, { Component } from 'react';
 import { Container, Row, Column } from '../../components/BootstrapGrid';
 import API from '../../utils/API'
 import { Input, FormBtn } from '../../components/Form'
-import { List, ListItem } from '../../components/List'
+import { ArticleContainer, Article } from '../../components/Article'
 import Scrape from '../../utils/Scrape'
+import './Home.css'
 class Home extends Component {
 
     state = {
@@ -11,13 +12,13 @@ class Home extends Component {
         posts: [],
     }
 
-    componentDidMount() {
-        this.loadArticles()
+    // componentDidMount() {
+    //     this.loadArticles()
 
-    };
-    loadArticles = () => {
+    // };
+    // loadArticles = () => {
    
-    }
+    // }
 
     handleInputChange = event => {
         const { name, value } = event.target;
@@ -27,7 +28,7 @@ class Home extends Component {
     };
 
     handleFormSubmit = event => {
-        // event.preventDefault();
+        event.preventDefault();
         let query = this.state.formInput
         Scrape.scrapePosts(query).then(data => {
             let articlesArray = [];
@@ -68,20 +69,25 @@ class Home extends Component {
                             name="formInput"
                             placeholder="Search Query (required)"
                         />
-                        <FormBtn onClick={this.handleFormSubmit}>Scrape NYT API</FormBtn>
+                        <FormBtn disabled={!(this.state.formInput)} onClick={this.handleFormSubmit}>Scrape NYT API</FormBtn>
                     </Column>
                     <Column>
                         {this.state.posts.length ? (
-                            <List>
+                            <ArticleContainer>
                                 {this.state.posts.map(posts => (
-                                    <ListItem key={posts._id}>
-                                        <strong>
+                                    <Article key={posts.title}>
+                                        <h1 className='post-title'>
                                             {posts.title}
-                                        </strong>
+                                        </h1>
+                                        <h2 className='post-url'>{posts.url}</h2>
+                                        <h2 className='post-snippet'>{posts.snippet}</h2>
+                                        <h2 className='post-source'>{posts.source}</h2>
 
-                                    </ListItem>
+                                        <h2 className='post-pubdate'>{posts.pubDate}</h2>
+
+                                    </Article>
                                 ))}
-                            </List>
+                            </ArticleContainer>
                         ) : (
                                 <h3>No Results to Display</h3>
                             )}

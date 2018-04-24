@@ -1,6 +1,6 @@
 import React from "react";
 
-export const ListItem = props => (
+export const Article = props => (
   <li className="list-group-item">
     {props.children}
   </li>
