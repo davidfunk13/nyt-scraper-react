@@ -4,7 +4,7 @@ const postsController = require('../controllers/postsController')
 
 router.route("/")
   .get(postsController.getAll)
-  .post(postsController.saveArticle);
+  // .post(postsController.saveArticle);
 
 router.route('/api/scraper')
   .post(postsController.scraper)
@@ -12,6 +12,9 @@ router.route('/api/scraper')
 
   router.route('/api/articles')
     .post(postsController.saveArticle)
+
+    router.route('/api/saved')
+    .get(postsController.getAll)
 
 // If no API routes are hit, send the React app
 router.use(function (req, res) {

@@ -19,8 +19,9 @@ console.log(req.body)
                 .catch(err =>console.log(err))
     },
     getAll: function (req, res) {
+        console.log(req.body)
         db.Post
-            .find(req.query)
+            .find({})
             .sort({date: -1})
             .then(dbModel => res.json(dbModel))
             .catch(err => res.status(422).json(err))

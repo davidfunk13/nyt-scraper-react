@@ -13,12 +13,15 @@ class Home extends Component {
         posts: [],
     }
 
-    // componentDidMount() {
-    //     this.loadArticles()
+    componentDidMount() {
+        this.loadArticles()
 
-    // };
+    };
     loadArticles = () => {
         console.log('hey')
+        API.getPosts().then(res =>{
+            console.log(res)
+        })
     }
 
     inputHandler = event => {
