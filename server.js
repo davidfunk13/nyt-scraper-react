@@ -13,10 +13,14 @@ app.use(express.static("client/build"));
 // Add routes, both API and view
 app.use(routes);
 
+app.get('*', function (req, res) { res.sendFile(path.resolve(__dirname, '../client/build/index.html')) })
+
+
 // Connect to the Mongo DB
 mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/nytposts");
+mongoose.Promise = Promise
 
 // Start the API server
-app.listen(PORT, function() {
+app.listen(PORT, function () {
   console.log(`🌎  ==> API Server now listening on PORT ${PORT}!`);
 });

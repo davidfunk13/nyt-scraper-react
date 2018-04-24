@@ -1,3 +1,4 @@
+const scraper = require('../scraper')
 const db = require('../models');
 
 module.exports = {
@@ -13,5 +14,11 @@ module.exports = {
             .sort({date: -1})
             .then(dbModel => res.json(dbModel))
             .catch(err => res.status(422).json(err))
+    },
+    scraper: function (req, res) {
+        let queryData = req.body.query
+         scraper(queryData)
+    
     }
+
 }
