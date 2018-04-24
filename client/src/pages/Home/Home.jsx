@@ -5,7 +5,7 @@ import { Input, FormBtn } from '../../components/Form'
 import { ArticleContainer, Article } from '../../components/Article'
 import Scrape from '../../utils/Scrape'
 import './Home.css'
-import Saved from '../../components/Saved/Saved';
+import { Saved, SavedContainer } from '../../components/Saved';
 
 class Home extends Component {
 
@@ -98,7 +98,7 @@ class Home extends Component {
                                         title={posts.title}
                                         url={posts.url}
                                         source={posts.source}
-                                        snipped={posts.snippet}
+                                        snippet={posts.snippet}
                                         pubDate={posts.pubDate}
                                         saveArticle={this.saveArticle}
                                     >
@@ -109,17 +109,23 @@ class Home extends Component {
                                 <h3>No Results to Display</h3>
                             )}
                     </Column>
+                    </Row>
+                    <Row>
                     <Column>
                         {this.state.saved.length ? (
-                            <div className='savedposts'>
+                            <SavedContainer>
                                 {this.state.saved.map(saved => (
                                     <Saved
-                                        saved={saved.title}
+                                    key={saved.title}
+                                    title={saved.title}
+                                    url={saved.url}
+                                    source={saved.source}
+                                    snippet={saved.snippet}
+                                    pubDate={saved.pubDate}
                                     >
-                                        
                                     </Saved>
                                 ))}
-                            </div>
+                            </SavedContainer>
 
                         ) : (
                                 <h3>No Saved Posts to Display</h3>
